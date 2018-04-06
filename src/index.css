@@ -3,3 +3,68 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.allCont{
+  width: 960px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: auto;
+}
+
+/* Form */
+
+.inpCont{
+  display: flex;
+  margin-top: 20px;
+}
+.btnAdd{
+  border: 2px solid #04ab6b;
+  width: 150px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+.btnAdd .iAdd{
+  color: #04ab6b;
+  font-size: 20px;
+  margin-right: 8px;
+}
+.btnAdd span{
+  font-size: 16px;
+  font-weight: 700;
+  color: #04ab6b;
+}
+form input[type="text"]{
+  width: 150px;
+  border: 2px solid #ccc;
+  height: 40px;
+  padding: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+.errorCont span{
+  color: #f00;
+  font-size: 20px;
+}
+
+/* List */
+
+.titleCont{
+  height: 30px;
+  background: #f4f5f7;
+  margin-top: 20px;
+  display: flex;
+  line-height: 30px;
+}
+.listCol{
+  width: 25%;
+}
+.listCol h4{
+  color: #646c73;
+  text-transform: uppercase;
+  margin: 0px;
+  text-align: left;
+  padding-left: 25px;   
+} 
