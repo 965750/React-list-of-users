@@ -57,7 +57,9 @@ class App extends Component {
             <div className="listCol">
             </div>
           </div>
-          <Users />
+          <ul className="accList">
+            <Users />
+          </ul>
       </div>
     </div>
     );

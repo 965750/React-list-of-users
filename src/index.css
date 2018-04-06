@@ -7,7 +7,7 @@ body {
   width: 960px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin: auto;
+  margin: 30px auto;
 }
 
 /* Form */
@@ -101,7 +101,6 @@ form input[type="submit"]{
   font-size: 16px;
   font-weight: 700;
   border-radius: 3px;
-  margin: 0px 0px 0px 10px;
 }
 .errorCont span{
   color: #f00;
@@ -120,6 +119,21 @@ form input[type="submit"]{
 .listCol{
   width: 25%;
 }
+.listCol span{
+  padding-left: 25px;
+}
+.listCol:nth-child(1){
+  width: 20%;
+}
+.listCol:nth-child(2){
+  width: 30%;
+}
+.listCol:nth-child(3){
+  width: 30%;
+}
+.listCol:nth-child(4){
+  width: 20%;
+}
 .listCol h4{
   color: #646c73;
   text-transform: uppercase;
@@ -127,7 +141,25 @@ form input[type="submit"]{
   text-align: left;
   padding-left: 25px;
   font-size: 14px;   
-} 
+}
+
+/* List */
+.accList{
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+}
+.accSingle{
+  height: 50px;
+  line-height: 50px;
+  display: flex;
+  text-align: left;
+}
+.accSingle:nth-child(even){
+  background: #fbfcfc;
+}
+
+
 @keyframes show{
   0%{
     opacity: 0;

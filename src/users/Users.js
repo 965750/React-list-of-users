@@ -34,10 +34,9 @@ class Users extends Component {
     render (){
         return (
             <div>
-                <h1>{this.state.title}</h1>
                 {
-                    this.state.contacts.map((user)=>{
-                        return <User key={user.username} age={user.username}>{user.name}</User>    
+                    this.state.contacts.map((user, index)=>{
+                        return <User key={user.username} email={user.email} age={user.username}>{user.name}</User>    
                     })
                 }
             </div>
