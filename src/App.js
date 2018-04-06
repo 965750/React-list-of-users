@@ -9,13 +9,13 @@ class App extends Component {
         <div className="allCont">
           <div className="inpCont">
             <div className="btnAdd">
-              <i class="fas fa-plus-circle iAdd"></i>
+              <i className="fas fa-plus-circle iAdd"></i>
               <span>Add user</span>
             </div>
             <form>
               <input type="text" placeholder="Name..." />
               <input type="text" placeholder="Email..." />
-              <input type="submit" value="Add" />  
+              <input type="submit" value="Submit" />  
             </form>
             <div className="errorCont">
               <span>Just an simple error</span>

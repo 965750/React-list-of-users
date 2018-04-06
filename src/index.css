@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 .allCont{
   width: 960px;
@@ -24,25 +24,49 @@ body {
   line-height: 40px;
   border-radius: 3px;
   box-sizing: border-box;
+  transition: all .1s;
+  margin: 0px 0px 0px 25px;
+}
+.btnAdd:hover{
+  background: #04ab6b;
+  cursor: pointer;
 }
 .btnAdd .iAdd{
   color: #04ab6b;
   font-size: 20px;
   margin-right: 8px;
 }
+.btnAdd:hover .iAdd{
+  color: #fff;
+}
 .btnAdd span{
   font-size: 16px;
   font-weight: 700;
   color: #04ab6b;
 }
+.btnAdd:hover span{
+  color: #fff;
+}
 form input[type="text"]{
-  width: 150px;
-  border: 2px solid #ccc;
+  width: 250px;
+  border: 1px solid #ccc;
   height: 40px;
   padding: 5px;
   font-size: 16px;
   box-sizing: border-box;
   border-radius: 3px;
+  margin: 0px 10px 0px 0px;
+}
+form input[type="submit"]{
+  width: 150px;
+  color: #fff;
+  background: #04ab6b;
+  border: none;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 3px;
+  margin: 0px 0px 0px 10px;
 }
 .errorCont span{
   color: #f00;
@@ -66,5 +90,6 @@ form input[type="text"]{
   text-transform: uppercase;
   margin: 0px;
   text-align: left;
-  padding-left: 25px;   
+  padding-left: 25px;
+  font-size: 14px;   
 } 
