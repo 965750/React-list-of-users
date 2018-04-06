@@ -24,8 +24,39 @@ body {
   line-height: 40px;
   border-radius: 3px;
   box-sizing: border-box;
-  transition: all .1s;
+  transition: all .3s;
   margin: 0px 0px 0px 25px;
+  opacity: 1;
+}
+.btnAddHid{
+  border: 2px solid #04ab6b;
+  width: 0px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  transition: all .3s;
+  margin: 0px 0px 0px 25px;
+  opacity: 0;
+  background: #04ab6b;
+}
+.btnAddHid span{
+  color: transparent;
+}
+.btnAddHid .iAdd{
+  display: none;
+}
+.addUserForm{
+  display: none;
+  opacity: 0;
+  transition: all .5s;
+}
+.addUserFormActive{
+  display: block;
+  opacity: 1;
+  transition: all .5s;
+  animation: show 1s;
 }
 .btnAdd:hover{
   background: #04ab6b;
@@ -56,6 +87,10 @@ form input[type="text"]{
   box-sizing: border-box;
   border-radius: 3px;
   margin: 0px 10px 0px 0px;
+}
+form input[type="text"]::placeholder { 
+  color: rgba(75, 75, 75, 0.274);
+  opacity: 1;
 }
 form input[type="submit"]{
   width: 150px;
@@ -93,3 +128,14 @@ form input[type="submit"]{
   padding-left: 25px;
   font-size: 14px;   
 } 
+@keyframes show{
+  0%{
+    opacity: 0;
+  }
+  30%{
+    opacity: .4;
+  }
+  100%{
+    opacity: 1;
+  }
+}

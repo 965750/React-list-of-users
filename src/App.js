@@ -3,18 +3,41 @@ import './App.css';
 import Users from './users/Users';
 
 class App extends Component {
+
+  state = {
+    btnActive: false,
+  }
+
+  inputToggle = () => {
+    
+    let btnAdd = document.getElementById("add");
+    let firstMargin = document.getElementById("inpName");
+    
+    btnAdd.classList.add("btnAddHid");
+    btnAdd.classList.remove("btnAdd");
+      
+    setTimeout(function() {
+        btnAdd.style.display = "none";
+        firstMargin.style.marginLeft = "25px";
+      },300);
+    
+    this.setState({
+      btnActive: true
+    }); 
+  }
+
   render() {
     return (
       <div className="App">
         <div className="allCont">
           <div className="inpCont">
-            <div className="btnAdd">
+            <div id="add" className="btnAdd" onClick={this.inputToggle}>
               <i className="fas fa-plus-circle iAdd"></i>
               <span>Add user</span>
             </div>
-            <form>
-              <input type="text" placeholder="Name..." />
-              <input type="text" placeholder="Email..." />
+            <form className={this.state.btnActive ? 'addUserForm addUserFormActive' : 'addUserForm'}>
+              <input id="inpName" type="text" placeholder="Name..." />
+              <input id="inpEmail" type="text" placeholder="Email..." />
               <input type="submit" value="Submit" />  
             </form>
             <div className="errorCont">
