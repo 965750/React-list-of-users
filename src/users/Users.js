@@ -1,28 +1,26 @@
 import React, {Component} from 'react';
 import User from './User';
+import Nav from './Nav';
 
 class Users extends Component {
     state = {
-        users: [
-            {name:"Adrian", age:27},
-            {name:"Daria", age:22},
-            {name:"Magda", age:37}
-        ],
         contacts: [],
         title:"Users List"
     }
     componentDidMount(){
         this.fetchData();
     }
+    fetchAdd(e){
+        e.preventDefault();    
+    }
     fetchData(){
-        fetch('https://randomuser.me/api/?results=50&nat=us,dk,fr,gb')
+        fetch('https://jsonplaceholder.typicode.com/users')
         .then(resp => resp.json())
-        .then(data => data.results.map(user => (
+        .then(data => data.map(user => (
             {
-                name: `${user.name.first} ${user.name.last}`,
-                username: `${user.login.username}`,
+                id: `${user.id}`,
+                name: `${user.name}`,
                 email: `${user.email}`,
-                location: `${user.location.street}, ${user.location.city}`
             }
         )))
         .then(contacts => this.setState({
@@ -31,14 +29,15 @@ class Users extends Component {
         }))
         .catch(error => console.log('parsing failed', error))
     }
+    deleteSingleUser = (index, e) => {
+        const users = Object.assign([], this.state.contacts);
+        users.splice(index, 1);
+        this.setState({contacts:users});
+    }
     render (){
         return (
             <div>
-                {
-                    this.state.contacts.map((user, index)=>{
-                        return <User key={user.username} email={user.email} age={user.username}>{user.name}</User>    
-                    })
-                }
+                
             </div>
         )
     }

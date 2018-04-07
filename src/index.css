@@ -102,12 +102,33 @@ form input[type="submit"]{
   font-weight: 700;
   border-radius: 3px;
 }
+.errorCont{
+  display: flex;
+  height: 40px;
+  display: none;
+}
+.errorCont .alertICont{
+  border: 2px solid #f00;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  margin: 9px 8px 11px 30px;
+}
 .errorCont span{
+  color: #000;
+  font-weight: 700;
+  line-height: 45px;
+  font-size: 14px;
+}
+.errorCont .alertICont span{
   color: #f00;
-  font-size: 20px;
+  font-size: 17px;
+  line-height: 20px;
+  padding-left: 1px;
+  font-weight: 700;
 }
 
-/* List */
+/* Title */
 
 .titleCont{
   height: 30px;
@@ -115,9 +136,6 @@ form input[type="submit"]{
   margin-top: 20px;
   display: flex;
   line-height: 30px;
-}
-.listCol{
-  width: 25%;
 }
 .listCol span{
   padding-left: 25px;
@@ -133,6 +151,16 @@ form input[type="submit"]{
 }
 .listCol:nth-child(4){
   width: 20%;
+  text-align: right;
+}
+.listCol:nth-child(4) button{
+  margin-right: 25px;
+  background: transparent;
+  border: none;
+  color: #ccc;
+}
+.listCol:nth-child(4) button:hover{
+  cursor: pointer;
 }
 .listCol h4{
   color: #646c73;
@@ -143,7 +171,7 @@ form input[type="submit"]{
   font-size: 14px;   
 }
 
-/* List */
+/* List Users */
 .accList{
   list-style-type: none;
   padding: 0px;
@@ -157,6 +185,23 @@ form input[type="submit"]{
 }
 .accSingle:nth-child(even){
   background: #fbfcfc;
+}
+.nrCont{
+  border: 1px solid #ccc;
+  height: 19px;
+  width: 19px;
+  border-radius: 50%;
+  margin: 15px 0px 15px 25px;
+  text-align: center;
+}
+.nrCont p{
+  margin: 0px;
+  padding: 0px 0px 0px 0px;
+  font-size: 13px;
+  height: 19px;
+  width: 19px;
+  color: #646c73;
+  line-height: 20px;
 }
 
 
