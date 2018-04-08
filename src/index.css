@@ -129,7 +129,16 @@ form input[type="submit"]{
 }
 
 /* Title */
-
+.resetBtn{
+  color: #f00;
+  text-decoration: underline;
+  margin-left: 15px;
+  font-size: 14px;
+  display: none;
+}
+.resetBtn:hover{
+  cursor: pointer;
+}
 .titleCont{
   height: 30px;
   background: #f4f5f7;
@@ -169,6 +178,10 @@ form input[type="submit"]{
   text-align: left;
   padding-left: 25px;
   font-size: 14px;   
+}
+.listCol h4:hover{
+  cursor: pointer;
+  color: #000;
 }
 
 /* List Users */

@@ -7,11 +7,18 @@ class App extends Component {
   state = {
         contacts: [],
         title:"Users List",
-        btnActive: false
+        btnActive: false,
+        sortedemail: 0,
+        sortedname: 0
     }
   componentDidMount(){
         this.fetchData();
     }
+  resetInp = () => {
+    this.firstNameInp.value = '';
+    this.emailInp.value = '';
+    document.getElementById('btnR').style.display = 'none';
+  }
   fetchData(){
         fetch('https://jsonplaceholder.typicode.com/users')
         .then(resp => resp.json())
@@ -29,27 +36,44 @@ class App extends Component {
         .catch(error => console.log('parsing failed', error))
     }
   addSingleUser = (e) => {
-    e.preventDefault();
+      e.preventDefault();
+      let name = this.firstNameInp.value;
+      let email = this.emailInp.value;
+      
+      const users = Object.assign([], this.state.contacts);
+      users.push({
+        name: name,
+        email: email
+      });
+      this.setState({contacts:users});
+       
+      var url = 'https://jsonplaceholder.typicode.com/users';
+         
+      fetch(url, {
+        method:'POST',
+        headers: {
+          'Content-type':'application/json'
+        },
+        body:JSON.stringify({name:name, email:email})
+      })
+          .then(resp => resp.json())
+          .then(data => console.log(data))
+          .catch(error => console.log("error: ", error))
+    }
+  
+  deleteSingleUser = (index, e) => {
+    const users = Object.assign([], this.state.contacts);
+    users.splice(index, 1);
+    this.setState({contacts:users});
     
-    let name = this.firstNameInp.value;
-    let email = this.emailInp.value;
-    var url = 'https://jsonplaceholder.typicode.com/users';
+    let url = 'https://jsonplaceholder.typicode.com/users/2';
       
     fetch(url, {
-      method:'POST',
-      headers: {
-        'Accept': 'aplication/json, text/plain, */*',
-        'Content-type':'aplication/json'
-      },
-      body:JSON.stringify({name:"just test", email:"testing"})
+      method:'DELETE',
+      mode: 'CORS'
     })
-        .then(resp => resp.json())
-        .then(data => console.log(data))
-  }
-  deleteSingleUser = (index, e) => {
-      const users = Object.assign([], this.state.contacts);
-      users.splice(index, 1);
-      this.setState({contacts:users});
+    .then(resp => resp.json())
+    .then(data => console.log(data))
   }
 
   inputToggle = () => {
@@ -74,8 +98,50 @@ class App extends Component {
     });
 
   }
-  letterCheck = (e) => {  
-      
+  letterCheck = (e) => {
+    if(this.firstNameInp.value.length > 0 || this.emailInp.value.length > 0){
+      document.getElementById('btnR').style.display = 'inline-block'; 
+    } else {
+      document.getElementById('btnR').style.display = 'none';
+    }
+    
+    var letters = /^[A-Za-z ]+$/;
+    var strng = this.firstNameInp.value;
+
+    var emailCheck = "@";
+    console.log(this.emailInp.value.includes("@"));
+
+    if(this.firstNameInp.value.match(letters))
+     {
+      return true;
+     }
+    else
+     {
+      this.firstNameInp.value = strng.substring(0,strng.length-1);
+      return false;
+     }
+  }
+
+  sort = (prop, reset) => {
+    const users = Object.assign([], this.state.contacts);
+
+    if(this.state[`sorted${prop}`] === 0){
+      let usersSorted = users.sort(function(a,b){return a[`${prop}`] > b[`${prop}`]; });
+      console.log('if');
+      this.setState({
+        contacts: usersSorted,
+        [`sorted${prop}`]: 1,
+        [`sorted${reset}`]: 0
+    })
+  } else {
+    console.log('else');
+    let usersSortedRev = users.sort(function(a,b){return a[`${prop}`] < b[`${prop}`]; });
+    this.setState({
+      contacts: usersSortedRev,
+      [`sorted${prop}`]: 0,
+      [`sorted${reset}`]: 0
+    })
+  }
   }
 
   render() {
@@ -88,9 +154,10 @@ class App extends Component {
               <span>Add user</span>
             </div>
             <form className={this.state.btnActive ? 'addUserForm addUserFormActive' : 'addUserForm'}>
-              <input ref={(input)=>{this.firstNameInp = input}} pattern="[a-z]"  title="only letters" maxLength="20" onKeyDown={this.letterCheck} id="inpName" type="text" placeholder="Name..." />
-              <input ref={(input)=>{this.emailInp = input}} id="inpEmail" type="text" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address" placeholder="Email..." />
-              <input type="submit" value="Submit" onClick={this.addSingleUser}/>  
+              <input ref={(input)=>{this.firstNameInp = input}}  title="only letters" maxLength="20" onKeyUp={this.letterCheck} id="inpName" type="text" placeholder="Name..." />
+              <input ref={(input)=>{this.emailInp = input}} id="inpEmail" type="text" onKeyUp={this.letterCheck} title="Invalid email address" placeholder="Email..." />
+              <input type="submit" value="Submit" onClick={this.addSingleUser}/>
+              <span className="resetBtn" id="btnR" onClick={this.resetInp}>Reset fields</span>  
             </form>
             <div className="errorCont">
               <div className="alertICont">
@@ -101,13 +168,13 @@ class App extends Component {
           </div>
           <div className="titleCont">
             <div className="listCol">
-              <h4>LP</h4>
+              <h4 onClick={this.sortId}>LP</h4>
             </div>
             <div className="listCol">
-              <h4>User</h4>
+              <h4 onClick={this.sort.bind(this, 'name', 'email')}>User</h4>
             </div>
             <div className="listCol">
-              <h4>E-Mail</h4>
+              <h4 onClick={this.sort.bind(this, 'email','name')}>E-Mail</h4>
             </div>
             <div className="listCol">
             </div>
