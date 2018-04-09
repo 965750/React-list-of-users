@@ -39,6 +39,17 @@ class App extends Component {
       e.preventDefault();
       let name = this.firstNameInp.value;
       let email = this.emailInp.value;
+      let errorCont = document.getElementById("errorSm");
+      let errorSmall = document.getElementById("errorContentSm");
+      let submitBtn = document.getElementById("submitBtn");
+      
+      if(this.state.contacts.length < 10){
+
+        
+      this.firstNameInp.value = '';
+      this.emailInp.value = '';
+      document.getElementById('btnR').style.display = 'none';
+      document.getElementById("emptyInfo").style.display = "none";
       
       const users = Object.assign([], this.state.contacts);
       users.push({
@@ -59,13 +70,27 @@ class App extends Component {
           .then(resp => resp.json())
           .then(data => console.log(data))
           .catch(error => console.log("error: ", error))
+      } else {
+        submitBtn.setAttribute("disabled", "disabled");
+      
+        errorCont.style.display = "block";
+        errorSmall.innerText = "List has reached maximum";
+        setTimeout(function(){
+          submitBtn.removeAttribute("disabled");
+        errorCont.style.display = "none";
+        errorSmall.innerText = "";
+        },7000)
+      } 
     }
   
   deleteSingleUser = (index, e) => {
-    const users = Object.assign([], this.state.contacts);
-    users.splice(index, 1);
-    this.setState({contacts:users});
     
+    console.log(this.state.contacts.length);
+    
+    const users = Object.assign([], this.state.contacts);
+      users.splice(index, 1);
+      this.setState({contacts:users});
+
     let url = 'https://jsonplaceholder.typicode.com/users/2';
       
     fetch(url, {
@@ -74,6 +99,14 @@ class App extends Component {
     })
     .then(resp => resp.json())
     .then(data => console.log(data))
+
+    if(this.state.contacts.length == 1){
+      let empty = document.getElementById("emptyInfo");
+      empty.style.display = "block";
+      return false;
+  } else {
+    return true;
+  }
   }
 
   inputToggle = () => {
@@ -99,25 +132,45 @@ class App extends Component {
 
   }
   letterCheck = (e) => {
+    let errorCont = document.getElementById("errorSm");
+    let errorSmall = document.getElementById("errorContentSm");
+    let submitBtn = document.getElementById("submitBtn");
+
+    var letters = /^[A-Za-z ]+$/;
+    var strng = this.firstNameInp.value;
+
     if(this.firstNameInp.value.length > 0 || this.emailInp.value.length > 0){
       document.getElementById('btnR').style.display = 'inline-block'; 
     } else {
       document.getElementById('btnR').style.display = 'none';
     }
-    
-    var letters = /^[A-Za-z ]+$/;
-    var strng = this.firstNameInp.value;
 
-    var emailCheck = "@";
-    console.log(this.emailInp.value.includes("@"));
-
-    if(this.firstNameInp.value.match(letters))
-     {
+    if(this.emailInp.value.includes("@") == false && this.emailInp.value.length > 7){
+      submitBtn.setAttribute("disabled", "disabled");
+      
+      errorCont.style.display = "block";
+      errorSmall.innerText = "Please provide correct E-mail";
+      
       return true;
-     }
-    else
+    } else {
+      submitBtn.removeAttribute("disabled");
+      errorCont.style.display = "none";
+      errorSmall.innerText = "";
+    }
+
+    if(this.firstNameInp.value.match(letters) || this.firstNameInp.value == "")
      {
-      this.firstNameInp.value = strng.substring(0,strng.length-1);
+      submitBtn.removeAttribute("disabled");
+      errorCont.style.display = "none";
+      errorSmall.innerText = ""; 
+
+      return true;
+     } else {
+      //this.firstNameInp.value = strng.substring(0,strng.length-1);
+      submitBtn.setAttribute("disabled", "disabled");
+      errorCont.style.display = "block";
+      errorSmall.innerText = "Name should contain only letters";
+
       return false;
      }
   }
@@ -156,14 +209,20 @@ class App extends Component {
             <form className={this.state.btnActive ? 'addUserForm addUserFormActive' : 'addUserForm'}>
               <input ref={(input)=>{this.firstNameInp = input}}  title="only letters" maxLength="20" onKeyUp={this.letterCheck} id="inpName" type="text" placeholder="Name..." />
               <input ref={(input)=>{this.emailInp = input}} id="inpEmail" type="text" onKeyUp={this.letterCheck} title="Invalid email address" placeholder="Email..." />
-              <input type="submit" value="Submit" onClick={this.addSingleUser}/>
+              <input type="submit" value="Submit" id="submitBtn" onClick={this.addSingleUser}/>
               <span className="resetBtn" id="btnR" onClick={this.resetInp}>Reset fields</span>  
             </form>
-            <div className="errorCont">
+            <div id="error" className="errorCont">
               <div className="alertICont">
                 <span>!</span>
               </div>
               <span id="errorContent">Just an simple error</span>
+            </div>
+            <div id="errorSm" className="errorContSm">
+              <div className="alertICont">
+                <span>!</span>
+              </div>
+              <span id="errorContentSm"></span>
             </div>
           </div>
           <div className="titleCont">
@@ -178,6 +237,10 @@ class App extends Component {
             </div>
             <div className="listCol">
             </div>
+          </div>
+          <div id="emptyInfo" className="emptyInfoCont">
+              <h3>No users added</h3>
+              <h3>Click on "Add user" button to fill the list</h3>
           </div>
           <ul className="accList">
           {

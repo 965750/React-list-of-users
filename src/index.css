@@ -8,6 +8,7 @@ body {
   border: 1px solid #ccc;
   border-radius: 5px;
   margin: 30px auto;
+  position: relative;
 }
 
 /* Form */
@@ -103,9 +104,14 @@ form input[type="submit"]{
   border-radius: 3px;
 }
 .errorCont{
-  display: flex;
   height: 40px;
   display: none;
+}
+.errorCont span{
+  color: #000;
+  font-weight: 700;
+  line-height: 45px;
+  font-size: 14px;
 }
 .errorCont .alertICont{
   border: 2px solid #f00;
@@ -114,17 +120,41 @@ form input[type="submit"]{
   border-radius: 50%;
   margin: 9px 8px 11px 30px;
 }
-.errorCont span{
-  color: #000;
-  font-weight: 700;
-  line-height: 45px;
-  font-size: 14px;
-}
 .errorCont .alertICont span{
   color: #f00;
   font-size: 17px;
   line-height: 20px;
   padding-left: 1px;
+  font-weight: 700;
+}
+.errorContSm .alertICont{
+  border: 2px solid #f00;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  margin: 0px auto 3px;
+}
+.errorContSm{
+  display: none;
+  height: 55px;
+  line-height: 12px;
+  width: 120px;
+  padding-left: 5px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+#errorContentSm{
+  font-size: 12px;
+  color: #f00;
+  text-align: center;
+}
+.errorContSm .alertICont span{
+  color: red;
+  font-size: 17px;
+  line-height: 20px;
+  padding-left: 0px;
   font-weight: 700;
 }
 
@@ -183,6 +213,15 @@ form input[type="submit"]{
   cursor: pointer;
   color: #000;
 }
+.emptyInfoCont{
+  margin: auto;
+  height: 80px;
+  display: none;
+}
+.emptyInfoCont h3{
+  color: #646c73;
+  margin: 20px 0px 15px;
+}
 
 /* List Users */
 .accList{
@@ -198,6 +237,10 @@ form input[type="submit"]{
 }
 .accSingle:nth-child(even){
   background: #fbfcfc;
+}
+.accSingle:last-child{
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 .nrCont{
   border: 1px solid #ccc;
