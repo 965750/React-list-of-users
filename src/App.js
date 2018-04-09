@@ -37,10 +37,6 @@ class App extends Component {
       }))
       .catch(error => console.log('parsing failed', error))
   }
-  doubled = (e) => {
-    // validate email already in array
-
-  }
   addSingleUser = (e) => {
     e.preventDefault();
     let name = this.firstNameInp.value;
@@ -76,7 +72,7 @@ class App extends Component {
 
       if (this.emailInp.value === '') {
         document.getElementById("add").style.animation = "btnAdd .3s";
-        //show error
+        //show error - email empty
 
         document.getElementById("error").style.display = "flex";
         document.querySelector(".alertICont").style.border = "2px solid #f00";
@@ -84,7 +80,7 @@ class App extends Component {
         document.getElementById("errorContent").innerText = "Please provide correct E-mail";
       } else {
         document.getElementById("add").style.animation = "btnAdd .3s";
-        //show error
+        //show error - added
 
         document.getElementById("error").style.display = "flex";
         document.querySelector(".alertICont").style.border = "2px solid #04ab6b";
@@ -165,6 +161,8 @@ class App extends Component {
     let btnAdd = document.getElementById("add");
     let firstInp = document.getElementById("inpName");
     let error = document.getElementById("error");
+    
+    // btn or form
 
     if (this.state.btnActive === false) {
 
@@ -201,6 +199,7 @@ class App extends Component {
     let errorSmall = document.getElementById("errorContentSm");
     let submitBtn = document.getElementById("submitBtn");
 
+    // name check
     var letters = /^[A-Za-z ]+$/;
 
     if (this.firstNameInp.value.length > 0 || this.emailInp.value.length > 0) {
@@ -209,6 +208,7 @@ class App extends Component {
       document.getElementById('btnR').style.display = 'none';
     }
 
+    // email check
     if (this.emailInp.value.includes("@") === false && this.emailInp.value.length > 1) {
       submitBtn.setAttribute("disabled", "disabled");
 
@@ -229,7 +229,7 @@ class App extends Component {
 
       return true;
     } else {
-      //this.firstNameInp.value = strng.substring(0,strng.length-1);
+     
       submitBtn.setAttribute("disabled", "disabled");
       errorCont.style.display = "block";
       errorSmall.innerText = "Name should contain only letters";
