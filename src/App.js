@@ -53,7 +53,7 @@ class App extends Component {
     let emailUp = this.emailInp.value.toUpperCase();
 
     for (i; i >= 0; i--) {
-      console.log(this.state.contacts[i].email.indexOf("Shanna@melissa.tv"));
+     
       let arrUp = this.state.contacts[i].email.toUpperCase();
 
       if (arrUp.includes(emailUp)) {
@@ -74,7 +74,7 @@ class App extends Component {
 
     if (this.state.contacts.length < 10) {
 
-      if (this.emailInp.value == '') {
+      if (this.emailInp.value === '') {
         document.getElementById("add").style.animation = "btnAdd .3s";
         //show error
 
@@ -99,7 +99,7 @@ class App extends Component {
         const users = Object.assign([], this.state.contacts);
         users.push({
           name: name,
-          email: email
+          email: email,
         });
         this.setState({
           contacts: users
@@ -243,14 +243,12 @@ class App extends Component {
 
     if (this.state[`sorted${prop}`] === 0) {
       let usersSorted = users.sort(function (a, b) { return a[`${prop}`] > b[`${prop}`]; });
-      console.log('if');
       this.setState({
         contacts: usersSorted,
         [`sorted${prop}`]: 1,
         [`sorted${reset}`]: 0
       })
     } else {
-      console.log('else');
       let usersSortedRev = users.sort(function (a, b) { return a[`${prop}`] < b[`${prop}`]; });
       this.setState({
         contacts: usersSortedRev,
